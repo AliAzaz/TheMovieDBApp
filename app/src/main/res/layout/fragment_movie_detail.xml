@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragment.MovieDetailFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="selMovieItem"
+            type="com.example.themoviedbapp.model.MoviesResult" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/content_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/productImg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_300sdp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                app:loadGroupImage="@{selMovieItem.poster_path}"
+                app:loadType="@{2}"
+                tools:src="@drawable/loading" />
+
+            <TextView
+                android:id="@+id/movie_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:layout_marginBottom="4dp"
+                android:text="@{selMovieItem.title}"
+                android:textColor="@android:color/black"
+                android:textSize="32sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/movie_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:fontFamily="sans-serif-light"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black"
+                app:firstString='@{"Release date"}'
+                app:secondString="@{selMovieItem.release_date}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/movie_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:fontFamily="sans-serif-light"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black"
+                app:firstString='@{"Language"}'
+                app:secondString="@{selMovieItem.original_language.toUpperCase()}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="@{selMovieItem.genres.size() > 0 ? View.VISIBLE : View.GONE}">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginRight="@dimen/_12sdp"
+                    android:text="Genres"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/teal_700" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/genreList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_1sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/genre_view" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:text="Summary"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/teal_700" />
+
+            <TextView
+                android:id="@+id/movie_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12sdp"
+                android:fontFamily="sans-serif-light"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@{selMovieItem.overview}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</layout>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TheMovieDBApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_start_date">Date start</string>
+    <string name="search_end_date">Date end</string>
+    <string name="search_latest">Search: Latest</string>
+</resources>
