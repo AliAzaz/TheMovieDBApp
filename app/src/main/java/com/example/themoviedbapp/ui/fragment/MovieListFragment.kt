@@ -192,12 +192,6 @@ class MovieListFragment : FragmentBase() {
         })
         bi.productList.apply {
             setHasFixedSize(true)
-            val manager = if (MainApp.layoutFlag) {
-                GridLayoutManager(activity, 3)
-            } else {
-                GridLayoutManager(activity, 2)
-            }
-            layoutManager = manager
             movieAdapter.setHasStableIds(true)
 //            adapter = movieAdapter
             movieAdapter.stateRestorationPolicy =
