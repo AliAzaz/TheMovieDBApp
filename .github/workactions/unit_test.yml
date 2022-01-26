@@ -1,0 +1,61 @@
+# Workflow name
+name: Generating APK with Unit Test
+
+# Generating triggers: It only triggers when push is generated on master branch and having tag that matches #.#.# this pattern.
+on:
+  push:
+    branches:
+      - master
+    tags:
+    - '*.*.*' 
+  
+ # Generating jobs: Execute job when trigger is hit.
+ jobs:
+ 
+ #Run test cases
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      # Cache gradle
+      - name: Cache Gradle and wrapper
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: cache-${{ runner.os }}-${{ matrix.jdk }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Run Unit tests
+        run: bash ./gradlew test --stacktrace
+        
+#Generate an apk
+  apk:
+      name: Generating APK
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v1
+        - name: set up JDK
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+
+        - name: Grant Permission to Execute
+          run: chmod +x gradlew
+
+        - name: Build debuging APK
+          run: bash ./gradlew assembleDebug --stacktrace
+
+        - name: Uploading APK to Github Artifacts
+          uses: actions/upload-artifact@v1
+          with:
+            name: app-debug
+            path: app/build/outputs/apk/debug/app-debug.apk
