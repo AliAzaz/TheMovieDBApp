@@ -1,7 +1,9 @@
 package com.example.themoviedbapp.di.auth
 
 import com.example.themoviedbapp.MainCoroutinesRule
+import com.example.themoviedbapp.di.auth.remote.ApiResponse
 import com.example.themoviedbapp.di.modules.NetworkApiModuleTest
+import com.example.themoviedbapp.model.MoviesResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers
@@ -40,7 +42,8 @@ class AuthApiTest : NetworkApiModuleTest<AuthApi>() {
 
         // Invoke
         val response = apiService.getMovieData(457431)
-        val responseBody = requireNotNull(response)
+        val resultSuccess = if (response is ApiResponse.ApiSuccessResponse) response.data else null
+        val responseBody = requireNotNull(resultSuccess)
         mockWebServer.takeRequest()
 
         // Then

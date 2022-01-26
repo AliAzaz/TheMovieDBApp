@@ -1,5 +1,6 @@
 package com.example.themoviedbapp.di.auth
 
+import com.example.themoviedbapp.di.auth.remote.ApiResponse
 import com.example.themoviedbapp.model.MoviesList
 import com.example.themoviedbapp.model.MoviesResult
 import retrofit2.http.GET
@@ -19,7 +20,7 @@ interface AuthApi {
     @GET(ApiRoutes.GET_MOVIES_FIRST + "{movie_id}" + ApiRoutes.GET_MOVIES_SECOND)
     suspend fun getMovieData(
         @Path("movie_id") movie_id: Int,
-    ): MoviesResult
+    ): ApiResponse<MoviesResult>
 
     @GET(ApiRoutes.GET_MOVIES_LIST)
     suspend fun getSearchMoviesList(

@@ -122,7 +122,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/populateTxt"
-                    app:msv_animateViewChanges="true"
                     app:msv_emptyView="@layout/empty_view"
                     app:msv_errorView="@layout/error_view"
                     app:msv_loadingView="@layout/loading_view"

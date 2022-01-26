@@ -1,6 +1,7 @@
 package com.example.themoviedbapp.di.modules
 
 import com.example.themoviedbapp.di.auth.AuthApi
+import com.example.themoviedbapp.di.auth.remote.ApiResponseCallAdapterFactory
 import com.example.themoviedbapp.utils.CONSTANTS.BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
@@ -36,6 +37,7 @@ class NetworkApiModule {
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
             .addCallAdapterFactory(coroutineCallAdapterFactory)
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory())
             .build()
     }
 

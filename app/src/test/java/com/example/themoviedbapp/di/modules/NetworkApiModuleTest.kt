@@ -1,6 +1,7 @@
 package com.example.themoviedbapp.di.modules
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.themoviedbapp.di.auth.remote.ApiResponseCallAdapterFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okio.buffer
 import okio.source
@@ -62,6 +63,7 @@ abstract class NetworkApiModuleTest<T> {
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory())
             .build()
             .create(clazz)
     }

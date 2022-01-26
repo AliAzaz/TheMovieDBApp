@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.example.themoviedbapp.MainCoroutinesRule
 import com.example.themoviedbapp.MockTestUtil
 import com.example.themoviedbapp.base.repository.ResponseStatusCallbacks
+import com.example.themoviedbapp.base.repository.ResultCallBack
 import com.example.themoviedbapp.base.viewmodel.usecases.MovieSearchUseCase
 import com.example.themoviedbapp.base.viewmodel.usecases.MovieListUseCase
 import com.example.themoviedbapp.base.viewmodel.usecases.MovieUseCase
@@ -66,9 +67,12 @@ class MovieViewModelTest {
             movieListUseCase.invoke(any())
                 .collect {
                     it.results.forEach { item ->
-                        items.add(
-                            movieUseCase.invoke(item.id)
-                        )
+                        movieUseCase.invoke(item.id).let {
+                            if (it is ResultCallBack.Success)
+                            items.add(
+                                it.data
+                            )
+                        }
                     }
                 }
             items.toList()
@@ -83,8 +87,6 @@ class MovieViewModelTest {
         coVerify(exactly = 1) {
             movieListUseCase.invoke()
         }
-//        verify { moviesListObserver.onChanged(match { it.data != null }) }
-//        verify { moviesListObserver.onChanged(match { it.data?.moviesInfo?.size == 1 }) }
 
     }
 
