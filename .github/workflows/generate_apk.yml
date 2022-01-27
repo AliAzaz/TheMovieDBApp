@@ -1,16 +1,16 @@
-# Workflow name
+#Workflow name
 name: Generating APK with Unit Test
 
-# Generating triggers: It only triggers when push is generated on master branch and having tag that matches #.#.# this pattern.
+#Generating triggers: It only triggers when push is generated on master branch and having tag that matches #.#.# this pattern.
 on:
   push:
     branches:
       - master
     tags:
     - '*.*.*' 
-  
- # Generating jobs: Execute job when trigger is hit.
- jobs:
+
+#Generating jobs: Execute job when trigger is hit.
+jobs:
  
  #Run test cases
   test:
