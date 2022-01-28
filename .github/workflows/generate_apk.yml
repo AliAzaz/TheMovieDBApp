@@ -4,37 +4,20 @@ name: Generating APK with Unit Test
 #Generating triggers: It only triggers when push is generated on master branch and having tag that matches #.#.# this pattern.
 on:
   push:
-    branches:
-      - master
     tags:
     - '*.*.*' 
 
 #Generating jobs: Execute job when trigger is hit.
 jobs:
- 
- #Run test cases
-  test:
-    name: Run Unit Tests
+
+  #Check if the branch is not master than it would not initiate this action.
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-
-      # Cache gradle
-      - name: Cache Gradle and wrapper
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: cache-${{ runner.os }}-${{ matrix.jdk }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-
-      - name: Run Unit tests
-        run: bash ./gradlew test --stacktrace
+        - uses: actions/checkout@v1
+        - name: Exit if not on master branch
+          if: endsWith(github.ref, 'master') == false
+          run: exit -1
         
 #Generate an apk
   apk:
