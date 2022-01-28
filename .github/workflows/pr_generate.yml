@@ -1,5 +1,5 @@
 #Workflow name
-name: Validate Unit Test on PR
+name: Validate Unit Test
 
 #Generating triggers: It only triggers when pull request is generated on any branch.
 on: [pull_request]
