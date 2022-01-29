@@ -18,7 +18,7 @@ import javax.inject.Singleton
 class ViewModelFactory @Inject constructor(private val repository: GeneralRepository) :
     ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MovieViewModel::class.java) -> MovieViewModel(
                 MovieListUseCase(repository),
