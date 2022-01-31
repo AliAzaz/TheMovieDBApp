@@ -37,6 +37,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    sourceSets {
+        test {
+            java {
+                exclude 'com/facebook/flipper/plugins/facebook/**'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -121,4 +128,5 @@ dependencies {
     androidTestImplementation 'org.mockito:mockito-android:2.18.3'
     androidTestImplementation 'android.arch.core:core-testing:2.1.0'
     androidTestImplementation "io.mockk:mockk-android:1.9.3"
+    testImplementation "org.robolectric:robolectric:4.7.3"
 }
