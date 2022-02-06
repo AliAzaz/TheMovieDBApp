@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themoviedbapp.model.MoviesResult
 import com.example.themoviedbapp.viewholder.MovieViewHolder
-import kotlinx.android.synthetic.main.product_view.view.*
 
 /**
  * @author AliAzazAlam on 5/16/2021.
@@ -42,7 +41,7 @@ class MovieDBListAdapter(private val clickListener: OnItemClickListener) : Recyc
     override fun onBindViewHolder(holder: MovieViewHolder, i: Int) {
         val item = filteredProductItems[i]
         holder.bind(item)
-        holder.itemView.parentLayout.setOnClickListener {
+        holder.itemView.setOnClickListener {
             clickListener.onItemClick(item, i)
         }
     }
