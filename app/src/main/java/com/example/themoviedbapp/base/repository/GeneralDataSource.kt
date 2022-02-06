@@ -1,5 +1,6 @@
 package com.example.themoviedbapp.base.repository
 
+import com.example.themoviedbapp.di.auth.remote.ApiResponse
 import com.example.themoviedbapp.model.MoviesList
 import com.example.themoviedbapp.model.MoviesResult
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +15,7 @@ interface GeneralDataSource {
     * */
     suspend fun getSpecificMovie(
         movie_id: Int
-    ): MoviesResult
+    ): ResultCallBack<MoviesResult>
     /*
     * Get movie from server End
     * */

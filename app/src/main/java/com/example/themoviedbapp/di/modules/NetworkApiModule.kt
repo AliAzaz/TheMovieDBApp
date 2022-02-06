@@ -1,7 +1,10 @@
 package com.example.themoviedbapp.di.modules
 
 import com.example.themoviedbapp.di.auth.AuthApi
+import com.example.themoviedbapp.di.auth.remote.ApiResponseCallAdapterFactory
 import com.example.themoviedbapp.utils.CONSTANTS.BASE_URL
+import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
+import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -36,6 +39,7 @@ class NetworkApiModule {
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
             .addCallAdapterFactory(coroutineCallAdapterFactory)
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory())
             .build()
     }
 
@@ -47,7 +51,9 @@ class NetworkApiModule {
             log.level = HttpLoggingInterceptor.Level.BODY
             item.addInterceptor(log)
             item.retryOnConnectionFailure(true)
-        }.build()
+        }
+            .addNetworkInterceptor(FlipperOkhttpInterceptor(NetworkFlipperPlugin()))
+            .build()
     }
 
 

@@ -26,3 +26,8 @@ data class ResponseStatusCallbacks<out T>(
     }
 }
 
+sealed class ResultCallBack<out T> {
+    data class Success<out T>(val data: T) : ResultCallBack<T>()
+    data class Error<out T>(val error: String) : ResultCallBack<T>()
+    data class CallException<out T>(val exception: Exception) : ResultCallBack<T>()
+}

@@ -99,10 +99,6 @@ class MovieListFragment : FragmentBase() {
         viewModel.moviesResponse.observe(viewLifecycleOwner, {
             when (it.status) {
                 ResponseStatus.SUCCESS -> {
-                    bi.nestedScrollView.showSnackBar(
-                        message = "Movies loaded successfully",
-                        duration = Snackbar.LENGTH_SHORT
-                    )
                     it.data?.apply {
                         movieAdapter.productItems = it.data.moviesInfo as ArrayList<MoviesResult>
                         bi.multiStateView.viewState = MultiStateView.ViewState.CONTENT

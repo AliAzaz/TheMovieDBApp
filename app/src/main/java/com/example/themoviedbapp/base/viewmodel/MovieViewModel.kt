@@ -4,12 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themoviedbapp.base.repository.ResponseStatusCallbacks
+import com.example.themoviedbapp.base.repository.ResultCallBack
 import com.example.themoviedbapp.base.viewmodel.usecases.MovieSearchUseCase
 import com.example.themoviedbapp.base.viewmodel.usecases.MovieListUseCase
 import com.example.themoviedbapp.base.viewmodel.usecases.MovieUseCase
 import com.example.themoviedbapp.model.FetchDataModel
 import com.example.themoviedbapp.model.MoviesModel
 import com.example.themoviedbapp.model.MoviesResult
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.apache.commons.lang3.StringUtils
@@ -75,11 +77,16 @@ class MovieViewModel @Inject constructor(
                                 updatedItems = arrayListOf()
                             }
                             max = if (dataset.results.size < max) dataset.results.size else max
-                            (min..max).forEach { item ->
-                                updatedItems.add(
-                                    movieUseCase.invoke(it[item].id)
-                                )
+                            val subProcess = async {
+                                (min..max).forEach { item ->
+                                    movieUseCase.invoke(it[item].id).let { movie ->
+                                        if (movie is ResultCallBack.Success){
+                                            updatedItems.add(movie.data)
+                                        }
+                                    }
+                                }
                             }
+                            subProcess.await()
                             _moviesList.value = ResponseStatusCallbacks.success(
                                 data = FetchDataModel(page = pagination, moviesInfo = updatedItems),
                                 "Movies received"
@@ -114,14 +121,19 @@ class MovieViewModel @Inject constructor(
         )
         viewModelScope.launch {
             try {
-                movieModel.results.let { dataset ->
-                    if (dataset.isNotEmpty()) {
-                        max = if (dataset.size < max) dataset.size else max
-                        (min..max).forEach { item ->
-                            updatedItems.add(
-                                movieUseCase.invoke(dataset[item].id)
-                            )
+                movieModel.results.let {
+                    if (it.isNotEmpty()) {
+                        max = if (it.size < max) it.size else max
+                        val subProcess = async {
+                            (min..max).forEach { item ->
+                                movieUseCase.invoke(it[item].id).let { movie ->
+                                    if (movie is ResultCallBack.Success){
+                                        updatedItems.add(movie.data)
+                                    }
+                                }
+                            }
                         }
+                        subProcess.await()
                         _moviesList.value = ResponseStatusCallbacks.success(
                             data = FetchDataModel(page = pagination, moviesInfo = updatedItems),
                             "Movies received"
@@ -243,11 +255,16 @@ class MovieViewModel @Inject constructor(
                                 updatedItems = arrayListOf()
                             }
                             max = if (dataset.results.size < max) dataset.results.size else max
-                            (min..max).forEach { item ->
-                                updatedItems.add(
-                                    movieUseCase.invoke(it[item].id)
-                                )
+                            val subProcess = async {
+                                (min..max).forEach { item ->
+                                    movieUseCase.invoke(it[item].id).let { movie ->
+                                        if (movie is ResultCallBack.Success){
+                                            updatedItems.add(movie.data)
+                                        }
+                                    }
+                                }
                             }
+                            subProcess.await()
                             _moviesList.value = ResponseStatusCallbacks.success(
                                 data = FetchDataModel(page = pagination, moviesInfo = updatedItems),
                                 "Movies received"
