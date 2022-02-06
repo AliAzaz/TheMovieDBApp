@@ -3,8 +3,8 @@ package com.example.themoviedbapp.di.modules
 import com.example.themoviedbapp.di.auth.AuthApi
 import com.example.themoviedbapp.di.auth.remote.ApiResponseCallAdapterFactory
 import com.example.themoviedbapp.utils.CONSTANTS.BASE_URL
-import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
-import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
+/*import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
+import com.facebook.flipper.plugins.network.NetworkFlipperPlugin*/
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -52,7 +52,7 @@ class NetworkApiModule {
             item.addInterceptor(log)
             item.retryOnConnectionFailure(true)
         }
-            .addNetworkInterceptor(FlipperOkhttpInterceptor(NetworkFlipperPlugin()))
+//            .addNetworkInterceptor(FlipperOkhttpInterceptor(NetworkFlipperPlugin()))
             .build()
     }
 
