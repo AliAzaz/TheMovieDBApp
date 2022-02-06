@@ -2,7 +2,7 @@
 
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=15) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
-![Tests](https://github.com/aliazaz/TheMovieDBApp/workflows/Validated%20Unit%20Test/badge.svg) ![Generate APK](https://github.com/aliazaz/TheMovieDBApp/workflows/Generated%20APK/badge.svg)
+![Tests](https://github.com/aliazaz/TheMovieDBApp/workflows/Validated%20Unit%20Test/badge.svg) ![Generate APK](https://github.com/aliazaz/TheMovieDBApp/workflows/Generate%20APK/badge.svg)
 
 ✨ Movie gallery app consumed MovieDB API ✨
 
