@@ -10,8 +10,10 @@ buildscript {
         androidx_lifecycle_version = "2.4.0"
         glide_version = "4.12.0"
         nav_version = "2.4.0"
-        flipper_version='0.131.2-SNAPSHOT'
-        flipper_noOpVersion='0.10.1'
+        flipper_version = '0.131.1'
+        flipper_soloaderVersion = '0.10.1'
+        flipper_noOpVersion = '0.9.0'
+        ndkVersion = '21.4.7075529'
     }
     repositories {
         google()
@@ -38,7 +40,6 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
 }
 

@@ -2,11 +2,12 @@ package com.example.themoviedbapp
 
 import android.app.Application
 import com.example.themoviedbapp.di.components.DaggerAppComponent
-/*import com.facebook.flipper.android.AndroidFlipperClient
+import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.android.utils.FlipperUtils
+import com.facebook.flipper.core.FlipperClient
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
-import com.facebook.soloader.SoLoader*/
+import com.facebook.soloader.SoLoader
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -33,12 +34,12 @@ class MainApp : Application(), HasAndroidInjector {
         /*
         * Adding flipper
         * */
-        /*SoLoader.init(this, false)
+        SoLoader.init(this, false)
         if (BuildConfig.DEBUG && FlipperUtils.shouldEnableFlipper(this)) {
-            val client = AndroidFlipperClient.getInstance(this)
+            val client: FlipperClient = AndroidFlipperClient.getInstance(this)
             client.addPlugin(InspectorFlipperPlugin(this, DescriptorMapping.withDefaults()))
             client.start()
-        }*/
+        }
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
