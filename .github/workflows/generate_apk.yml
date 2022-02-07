@@ -4,8 +4,10 @@ name: Generate APK
 #Generating triggers: It only triggers when push is generated on master branch and having tag that matches #.#.# this pattern.
 on:
   push:
+    branches:
+      - master
     tags:
-    - '*.*.*' 
+      - '*.*.*' 
 
 #Generating jobs: Execute job when trigger is hit.
 jobs:
@@ -14,17 +16,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v1
-        - name: Exit if not on master branch
-          if: endsWith(github.ref, 'master') == false
-          run: exit -1
-        
-#Generate an apk
-  apk:
-      name: Generating APK
-      runs-on: ubuntu-latest
-
-      steps:
+        #Generate an apk
+        - name: Generating APK
         - uses: actions/checkout@v1
         - name: set up JDK
           uses: actions/setup-java@v1
