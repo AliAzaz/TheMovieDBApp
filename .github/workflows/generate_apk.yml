@@ -4,8 +4,6 @@ name: Generate APK
 #Generating triggers: It only triggers when push is generated on master branch and having tag that matches #.#.# this pattern.
 on:
   push:
-    branches:
-      - master
     tags:
       - '*.*.*' 
 
