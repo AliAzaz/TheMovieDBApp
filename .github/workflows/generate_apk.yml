@@ -19,6 +19,11 @@ jobs:
 
       steps:
         - uses: actions/checkout@v1
+        - name: Exit if not on master branch
+          if: endsWith(github.ref, 'master') == false
+          run: exit -1
+      
+        - uses: actions/checkout@v1
         - name: set up JDK
           uses: actions/setup-java@v1
           with:
