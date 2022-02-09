@@ -77,7 +77,7 @@ class MovieViewModel @Inject constructor(
                                 updatedItems = arrayListOf()
                             }
                             max = if (dataset.results.size < max) dataset.results.size else max
-                            val subProcess = async {
+                            val subProcess = launch {
                                 (min..max).forEach { item ->
                                     movieUseCase.invoke(it[item].id).let { movie ->
                                         if (movie is ResultCallBack.Success){
@@ -86,7 +86,7 @@ class MovieViewModel @Inject constructor(
                                     }
                                 }
                             }
-                            subProcess.await()
+                            subProcess.join()
                             _moviesList.value = ResponseStatusCallbacks.success(
                                 data = FetchDataModel(page = pagination, moviesInfo = updatedItems),
                                 "Movies received"

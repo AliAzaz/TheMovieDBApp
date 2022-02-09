@@ -5,6 +5,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.google.android.material.snackbar.Snackbar
+import org.apache.commons.lang3.StringUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.Duration
@@ -33,20 +34,15 @@ fun String.shortStringLength(): String {
 
 fun View.showSnackBar(
     message: String,
-    duration: Int = Snackbar.LENGTH_INDEFINITE,
-    action: String = "",
+    duration: Int = Snackbar.LENGTH_LONG,
+    action: String = StringUtils.EMPTY,
     actionListener: () -> Unit = {}
-): Snackbar {
-    val snackbar = Snackbar.make(this, message, duration)
-    if (action != "") {
-        snackbar.duration = Snackbar.LENGTH_INDEFINITE
-        snackbar.setAction(action) {
-            actionListener()
-            snackbar.dismiss()
-        }
-    }
-    snackbar.show()
-    return snackbar
+) {
+    SnackBarUtils.showSnackBar(this, message, duration, action, actionListener)
+}
+
+fun View.dismissSnackBar(){
+    SnackBarUtils.dismissSnackBar()
 }
 
 fun EditText.hideKeyboard() {

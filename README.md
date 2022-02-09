@@ -6,11 +6,18 @@
 
 ✨ Movie gallery app consumed MovieDB API ✨
 
+<img alt="Pic-1" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic1.png" width="220" height="460"/> &nbsp;
+<img alt="Pic-2" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic2.png" width="220" height="460"/> &nbsp;
+<img alt="Pic-3" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic3.png" width="220" height="460"/>
+<br/>
+<img alt="Pic-4" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic4.png" width="270" height="460"/> &nbsp;
+<img alt="Pic-5" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic5.png" width="270" height="460"/>
+
 ## Features
 
 - Search Movies on basic of date range (span 14Days)
 - Populate latest movies
-- App support pagination
+- Movies Gallery support pagination
 
 
 ## Architecture
@@ -22,7 +29,6 @@
 
 ## CONNECT👍
 
-[![Visits Badge](https://badges.pufler.dev/visits/aliazaz/aliazaz)](https://github.com/aliazaz)
 [![LinkedIn Badge](https://img.shields.io/badge/-aliazazalam-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/aliazazalam/)](https://www.linkedin.com/in/aliazazalam)
 [![Twitter Badge](https://img.shields.io/badge/-aliazaz-gray?style=flat&logo=twitter&logoColor=blue&link=https://twitter.com/AliAzazAlam1)](https://twitter.com/AliAzazAlam1)
 [![Medium Badge](https://img.shields.io/badge/-aliazazalam-black?style=flat&logo=Medium&logoColor=white&link=https://medium.com/@ali.azaz.alam)](https://medium.com/@ali.azaz.alam)

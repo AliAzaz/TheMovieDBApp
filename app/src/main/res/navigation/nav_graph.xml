@@ -8,11 +8,11 @@
     <fragment
         android:id="@+id/movieListFragment"
         android:name="com.example.themoviedbapp.ui.fragment.MovieListFragment"
-        android:label="Home"
+        android:label="Movies"
         tools:layout="@layout/fragment_movie_list">
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment"/>
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"

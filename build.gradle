@@ -6,13 +6,15 @@ buildscript {
         retrofit_version = "2.9.0"
         okhttp_version = '5.0.0-alpha.4'
         dagger_version = '2.40.5'
-        coroutines_version = '1.6.0-native-mt'
+        coroutines_version = '1.6.0'
         androidx_lifecycle_version = "2.4.0"
-        glide_version = "4.12.0"
+        glide_version = '4.13.0'
         nav_version = "2.4.0"
         flipper_version = '0.131.1'
         flipper_soloaderVersion = '0.10.1'
         flipper_noOpVersion = '0.9.0'
+        recycler_version = '1.2.1'
+        recycler_selection_version = '1.1.0'
         ndkVersion = '21.4.7075529'
     }
     repositories {

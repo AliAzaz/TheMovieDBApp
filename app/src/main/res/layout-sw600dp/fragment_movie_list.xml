@@ -121,6 +121,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:msv_animateViewChanges="true"
                     app:layout_constraintTop_toBottomOf="@+id/populateTxt"
                     app:msv_emptyView="@layout/empty_view"
                     app:msv_errorView="@layout/error_view"
@@ -133,7 +134,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        app:spanCount="4"
+                        app:spanCount="5"
                         tools:listitem="@layout/product_view" />
 
                 </com.kennyc.view.MultiStateView>

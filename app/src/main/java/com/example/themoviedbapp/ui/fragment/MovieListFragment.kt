@@ -9,6 +9,7 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themoviedbapp.MainApp
 import com.example.themoviedbapp.R
@@ -19,10 +20,7 @@ import com.example.themoviedbapp.base.viewmodel.MovieViewModel
 import com.example.themoviedbapp.databinding.FragmentMovieListBinding
 import com.example.themoviedbapp.model.MoviesResult
 import com.example.themoviedbapp.ui.MainActivity
-import com.example.themoviedbapp.utils.addDays
-import com.example.themoviedbapp.utils.getCalendarDate
-import com.example.themoviedbapp.utils.obtainViewModel
-import com.example.themoviedbapp.utils.showSnackBar
+import com.example.themoviedbapp.utils.*
 import com.google.android.material.snackbar.Snackbar
 import com.kennyc.view.MultiStateView
 import kotlinx.coroutines.delay
@@ -77,8 +75,9 @@ class MovieListFragment : FragmentBase() {
         return bi.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         /*
         * Obtaining ViewModel
         * */
@@ -103,14 +102,14 @@ class MovieListFragment : FragmentBase() {
                         movieAdapter.productItems = it.data.moviesInfo as ArrayList<MoviesResult>
                         bi.multiStateView.viewState = MultiStateView.ViewState.CONTENT
                     }
+                    bi.nestedScrollView.dismissSnackBar()
                     scrollFlag = false
                 }
                 ResponseStatus.ERROR -> {
                     it.data?.let { item ->
                         if (item.page == 1) {
                             bi.nestedScrollView.showSnackBar(
-                                message = "Movies not found",
-                                duration = Snackbar.LENGTH_LONG
+                                message = "Movies not found"
                             )
                             bi.multiStateView.viewState = MultiStateView.ViewState.EMPTY
                         } else
@@ -133,14 +132,11 @@ class MovieListFragment : FragmentBase() {
                         if (item.page == 1) {
                             bi.multiStateView.viewState =
                                 MultiStateView.ViewState.LOADING
-                            bi.nestedScrollView.showSnackBar(
-                                message = "Movies loading",
-                                duration = Snackbar.LENGTH_LONG
-                            )
                             scrollFlag = true
                         } else {
                             bi.nestedScrollView.showSnackBar(
-                                message = "Loading more movies"
+                                message = "Loading more movies",
+                                duration = Snackbar.LENGTH_INDEFINITE
                             )
                             scrollFlag = true
                         }
@@ -166,10 +162,10 @@ class MovieListFragment : FragmentBase() {
         bi.inputSearchPhotos.setEndIconOnClickListener {
             bi.edtStart.clearFocus()
             bi.edtEnd.clearFocus()
-            bi.edtStart.setText(null)
-            bi.edtEnd.setText(null)
+            bi.edtStart.text = null
+            bi.edtEnd.text = null
             movieAdapter.clearProductItem()
-            bi.populateTxt.text = "Search: Latest"
+            bi.populateTxt.text = getString(R.string.search_latest)
             viewModel.fetchMoviesFromRemoteServer(1)
         }
 
@@ -189,7 +185,6 @@ class MovieListFragment : FragmentBase() {
         bi.productList.apply {
             setHasFixedSize(true)
             movieAdapter.setHasStableIds(true)
-//            adapter = movieAdapter
             movieAdapter.stateRestorationPolicy =
                 RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
