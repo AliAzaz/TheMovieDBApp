@@ -1,17 +1,17 @@
 # MovieDBApp
 
-[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=15) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
-
-![Tests](https://github.com/aliazaz/TheMovieDBApp/workflows/Validated%20Unit%20Test/badge.svg) ![Generate APK](https://github.com/aliazaz/TheMovieDBApp/workflows/Generate%20APK/badge.svg)
+[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=15) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) ![Tests](https://github.com/aliazaz/TheMovieDBApp/workflows/Validated%20Unit%20Test/badge.svg) ![Generate APK](https://github.com/aliazaz/TheMovieDBApp/workflows/Generate%20APK/badge.svg)
 
 ✨ Movie gallery app consumed MovieDB API ✨
 
-<img alt="Pic-1" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic1.png" width="220" height="460"/> &nbsp;
-<img alt="Pic-2" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic2.png" width="220" height="460"/> &nbsp;
-<img alt="Pic-3" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic3.png" width="220" height="460"/>
+### Phone Design
+<img alt="Pic-1" src="https://raw.githubusercontent.com/AliAzaz/TheMovieDBApp/master/images/Pic1.jpg" width="220" height="450"/> &nbsp;
+<img alt="Pic-2" src="https://raw.githubusercontent.com/AliAzaz/TheMovieDBApp/master/images/Pic2.jpg" width="220" height="450"/> &nbsp;
+<img alt="Pic-3" src="https://raw.githubusercontent.com/AliAzaz/TheMovieDBApp/master/images/Pic3.jpg" width="220" height="450"/>
 <br/>
-<img alt="Pic-4" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic4.png" width="270" height="460"/> &nbsp;
-<img alt="Pic-5" src="https://raw.githubusercontent.com/AliAzaz/PixabayGalleryApp/master/images/Pic5.png" width="270" height="460"/>
+### Tablet Design
+<img alt="Pic-4" src="https://raw.githubusercontent.com/AliAzaz/TheMovieDBApp/master/images/Pic4.jpg" width="400" height="210"/> &nbsp;
+<img alt="Pic-5" src="https://raw.githubusercontent.com/AliAzaz/TheMovieDBApp/master/images/Pic5.jpg" width="400" height="210"/>
 
 ## Features
 
