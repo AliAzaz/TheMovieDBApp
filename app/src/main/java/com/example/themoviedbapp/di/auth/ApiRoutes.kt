@@ -7,6 +7,5 @@ import com.example.themoviedbapp.utils.CONSTANTS
  */
 object ApiRoutes {
     const val GET_MOVIES_FIRST = "movie/"
-    const val GET_MOVIES_SECOND = "?api_key=${CONSTANTS.API_KEY}"
-    const val GET_MOVIES_LIST = GET_MOVIES_FIRST + "changes" + GET_MOVIES_SECOND
+    const val GET_MOVIES_LIST = GET_MOVIES_FIRST + "changes"
 }

@@ -17,7 +17,7 @@ interface AuthApi {
         @Query("page") page: Int = 1,
     ): MoviesList
 
-    @GET(ApiRoutes.GET_MOVIES_FIRST + "{movie_id}" + ApiRoutes.GET_MOVIES_SECOND)
+    @GET(ApiRoutes.GET_MOVIES_FIRST + "{movie_id}")
     suspend fun getMovieData(
         @Path("movie_id") movie_id: Int,
     ): ApiResponse<MoviesResult>

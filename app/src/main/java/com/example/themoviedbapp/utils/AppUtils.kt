@@ -2,8 +2,12 @@ package com.example.themoviedbapp.utils
 
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.transition.Fade
+import androidx.transition.Transition
+import androidx.transition.TransitionManager
 import com.google.android.material.snackbar.Snackbar
 import org.apache.commons.lang3.StringUtils
 import java.text.ParseException
@@ -17,7 +21,8 @@ fun String.convertStringToUpperCase(): String {
      * Program that first convert all uper case into lower case then
      * convert fist letter into uppercase
      */
-    val calStr = this.split(" ").map { it.toLowerCase(Locale.ENGLISH).capitalize(Locale.ENGLISH) }
+    val calStr = this.split(" ").map { it.lowercase(Locale.ENGLISH)
+        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ENGLISH) else it.toString() } }
     return calStr.joinToString(separator = " ")
 }
 
@@ -69,4 +74,12 @@ fun String.getCalendarDate(): Calendar {
         e.printStackTrace()
     }
     return calendar
+}
+
+fun View.fadeVisibility(visibility: Int, duration: Long = 1000) {
+    val transition: Transition = Fade()
+    transition.duration = duration
+    transition.addTarget(this)
+    TransitionManager.beginDelayedTransition(this.parent as ViewGroup, transition)
+    this.visibility = visibility
 }

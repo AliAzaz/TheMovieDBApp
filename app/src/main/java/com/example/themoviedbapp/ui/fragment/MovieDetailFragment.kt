@@ -22,13 +22,13 @@ import kotlinx.coroutines.launch
 
 class MovieDetailFragment : FragmentBase() {
 
-    lateinit var viewModel: MovieViewModel
-    lateinit var bi: FragmentMovieDetailBinding
-    lateinit var tagsAdapter: GenresAdapter
+    private lateinit var viewModel: MovieViewModel
+    private lateinit var bi: FragmentMovieDetailBinding
+    private lateinit var tagsAdapter: GenresAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(false);
+        setHasOptionsMenu(false)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -47,8 +47,8 @@ class MovieDetailFragment : FragmentBase() {
         return bi.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         /*
         * Obtaining ViewModel
@@ -78,7 +78,6 @@ class MovieDetailFragment : FragmentBase() {
                             /*
                             * Show loading and wait until view is not ready
                             * */
-                            delay(500)
                             bi.productImg.visibility = View.VISIBLE
 
 

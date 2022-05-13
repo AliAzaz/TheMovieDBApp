@@ -44,24 +44,13 @@ class GeneralRepository @Inject constructor(private val apiService: AuthApi) : G
         }
     }
 
-/*    override suspend fun getAllMovies(moviesList: MoviesList): Flow<MoviesModel> {
-        return flow {
-            val movie = MoviesModel(moviesList.page, mutableListOf<MovieResult>(),moviesList.total_pages)
-            moviesList.results.forEach {
-
-            }
-            emit(
-
-            )
-        }
-    }*/
-
     override suspend fun getSearchMoviesList(
         page: Int,
         start_date: String,
         end_date: String
     ): Flow<MoviesList> {
         return flow {
+
             emit(
                 apiService.getSearchMoviesList(
                     page = page,

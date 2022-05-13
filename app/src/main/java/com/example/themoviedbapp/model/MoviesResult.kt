@@ -21,7 +21,7 @@ data class MoviesResult(
     @Expose val popularity: Double,
 
     @SerializedName("poster_path")
-    @Expose val poster_path: String,
+    @Expose val poster_path: String?,
 
     @Expose val production_companies: List<ProductionCompany>,
     @Expose val production_countries: List<ProductionCountry>,

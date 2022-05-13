@@ -26,15 +26,16 @@ import com.kennyc.view.MultiStateView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MovieListFragment : FragmentBase() {
 
-    lateinit var viewModel: MovieViewModel
-    lateinit var movieAdapter: MovieDBListAdapter
-    lateinit var bi: FragmentMovieListBinding
-    var actionBarHeight = 0
-    var scrollFlag = false
+    private lateinit var viewModel: MovieViewModel
+    private lateinit var movieAdapter: MovieDBListAdapter
+    private lateinit var bi: FragmentMovieListBinding
+    private var actionBarHeight = 0
+    private var scrollFlag = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,7 +71,6 @@ class MovieListFragment : FragmentBase() {
         * */
         actionBarHeight *= -1
         bi.fldGrpSearchPhotos.translationY = actionBarHeight.toFloat()
-        bi.nestedScrollView.translationY = actionBarHeight.toFloat() / 2
 
         return bi.root
     }
@@ -99,7 +99,10 @@ class MovieListFragment : FragmentBase() {
             when (it.status) {
                 ResponseStatus.SUCCESS -> {
                     it.data?.apply {
-                        movieAdapter.productItems = it.data.moviesInfo as ArrayList<MoviesResult>
+                        movieAdapter.productItems =
+                            it.data.moviesInfo?.filter { item ->
+                                item.poster_path != null
+                            } as ArrayList<MoviesResult>
                         bi.multiStateView.viewState = MultiStateView.ViewState.CONTENT
                     }
                     bi.nestedScrollView.dismissSnackBar()
@@ -109,7 +112,7 @@ class MovieListFragment : FragmentBase() {
                     it.data?.let { item ->
                         if (item.page == 1) {
                             bi.nestedScrollView.showSnackBar(
-                                message = "Movies not found"
+                                message = getString(R.string.movies_not_found)
                             )
                             bi.multiStateView.viewState = MultiStateView.ViewState.EMPTY
                         } else
@@ -119,8 +122,8 @@ class MovieListFragment : FragmentBase() {
                     } ?: run {
                         bi.multiStateView.viewState = MultiStateView.ViewState.ERROR
                         bi.nestedScrollView.showSnackBar(
-                            message = "Internet not available",
-                            action = "Retry"
+                            message = getString(R.string.internet_na),
+                            action = getString(R.string.retry)
                         ) {
                             viewModel.retryConnection()
                         }
@@ -135,7 +138,7 @@ class MovieListFragment : FragmentBase() {
                             scrollFlag = true
                         } else {
                             bi.nestedScrollView.showSnackBar(
-                                message = "Loading more movies",
+                                message = getString(R.string.loading_more_mov),
                                 duration = Snackbar.LENGTH_INDEFINITE
                             )
                             scrollFlag = true
@@ -194,7 +197,7 @@ class MovieListFragment : FragmentBase() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -206,22 +209,19 @@ class MovieListFragment : FragmentBase() {
         return when (item.itemId) {
             R.id.search_menu -> {
                 bi.fldGrpSearchPhotos.animate().apply {
-                    duration = 1000
+                    duration = CONSTANTS.Numbers._1000
                     translationY(if (bi.fldGrpSearchPhotos.translationY == actionBarHeight.toFloat()) 10f else actionBarHeight.toFloat())
                 }.start()
+
                 bi.nestedScrollView.animate().apply {
-                    duration = 1000
-                    translationY(if (bi.nestedScrollView.translationY == actionBarHeight.toFloat() / 2) 10f else actionBarHeight.toFloat() / 2)
+                    duration = CONSTANTS.Numbers._1000
+                    translationY(if (bi.nestedScrollView.translationY == 0f) bi.fldGrpSearchPhotos.height.toFloat() * 2 else 0f)
                 }.start()
 
                 if (bi.fldGrpSearchPhotos.translationY == actionBarHeight.toFloat())
-                    bi.fldGrpDt.visibility = View.VISIBLE
-                else {
-                    lifecycleScope.launch {
-                        delay(1000)
-                        bi.fldGrpDt.visibility = View.GONE
-                    }
-                }
+                    bi.fldGrpDt.fadeVisibility(View.VISIBLE)
+                else
+                    bi.fldGrpDt.fadeVisibility(View.GONE)
 
                 true
             }
@@ -231,8 +231,8 @@ class MovieListFragment : FragmentBase() {
 
 
     /*
-        * On text changed listener for searching movies
-        * */
+     * On text changed listener for searching movies
+     * */
     fun startDateTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         bi.edtEnd.isEnabled = false
         bi.edtEnd.text = null

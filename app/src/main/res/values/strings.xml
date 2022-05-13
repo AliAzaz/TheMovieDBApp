@@ -5,4 +5,8 @@
     <string name="search_start_date">Date start</string>
     <string name="search_end_date">Date end</string>
     <string name="search_latest">Search: Movies</string>
+    <string name="movies_not_found">Movies not found</string>
+    <string name="internet_na">Internet not available</string>
+    <string name="retry">Retry</string>
+    <string name="loading_more_mov">Loading more movies</string>
 </resources>
